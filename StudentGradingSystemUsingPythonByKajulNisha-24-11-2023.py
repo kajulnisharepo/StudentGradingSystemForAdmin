@@ -1,68 +1,99 @@
-# Project Name: Student Grading System
-# Description
-'''
-Description
-
-Create a student grading system using Python that has the following functionalities:
-1. Entering the Grades of a student
-2. Removing a student from the system
-3. Calculating the average grades of students
-The user should be able to select whether he/she wants to remove a student, enter grades for a
-student or find the average grades.
-Also, perform the following as part of this project:
-
-There should be a log-in system to allow only admin access to the grading system.
-Make sure you use dictionaries and lists for storing student’s data.
-Use Python functions as much as you can
-
-Hint: Statistics module might be helpful
-'''
 import statistics
-Student_DB_Dictionary = {'Alex': [92,76,88],'Sam': [89,92,93]}
+
+# Global variables as in-memory
+Student_DB_Dictionary = {'Alex': [92,76,88],'Sam': [89,92,93], 'Jeff': [90,92,93]}
+welcomeStr = "Welcome to Grade Central \n"
+
+adminsCredential = {"admin":"1234","staff":"Pass@123"}
+
+def main():
+    print(welcomeStr)
+    selectedOption = chooseOptions()
+    if selectedOption == '1':
+        AddGrade()
+    elif selectedOption == '2':
+        RemoveStudent()
+    elif selectedOption == '3':
+        AverageGradeOfStudent()
+    elif selectedOption == '4':
+        GetAllStudentList()
+    elif selectedOption == '5':
+        AddNewStudent()
+    elif selectedOption == '6':
+        exit()
+    else:
+        print('Please Enter a valid choice was given! try again :( \n')        
 
 def chooseOptions():
     print('[1] - Enter Grades')
     print('[2] - Remove Student')
     print('[3] - Student Average Grades')
     print('[4] - Get all Students list')
-    print('[5] - Exit')
+    print('[5] - Add New Student')
+    print('[6] - Exit')
     print('')
     return input('What would you like to do today? (Enter a number) ')
 
-def Operations():
-    '''
-    print('==============================\n')
-    print('Welcome to Grade Central \n')
-    print('==============================\n')
-    '''
-    return chooseOptions()
+def Authenticate():
+    userNameForlogin = input('UserName: ')
+    passwordForlogin = input('Password: ')
 
-def AddStudent():    
+    if userNameForlogin in adminsCredential:
+        if adminsCredential[userNameForlogin] == passwordForlogin:
+            print('G\'day,',userNameForlogin,"!")
+            while True:
+                main()
+        else:
+            print('Invalid Password, Try again with correct one')
+            Relogin()
+    else:
+        print('Invalid Credentials, Try again with correct one or Contact Support team')
+        Relogin()
+
+def Relogin():
+    wantToTryAgain = input('Type \'Y\' to see login screen again! ')
+    if wantToTryAgain.capitalize() == 'Y':
+        Authenticate()
+
+def AddGrade():    
     StudentName = input('StudentName: ').capitalize()
-    Grade = input('Grade (comma seperated): ')   
+    Grade = input('Grade : ')   
 
-    print('Adding Grade...\n ')
-
-    Student_DB_Dictionary[StudentName]=[Grade]
-   
-    
-    print('StudentName: ',StudentName)
-    print('Grade: ',Grade)
-    print(Student_DB_Dictionary)    
-    
+    if StudentName in Student_DB_Dictionary:
+        print('Adding Grade...\n ')
+        Student_DB_Dictionary[StudentName].append(float(Grade))
+    else:
+        print('Student does not exist!')
+    print(Student_DB_Dictionary)
 
 def RemoveStudent():    
     StudentNameToRemove = input('What student to remove: ').capitalize()   
     print('removing student...\n ')
-    del Student_DB_Dictionary[StudentNameToRemove]    
+    if StudentNameToRemove in Student_DB_Dictionary:
+        print('removing student...\n ')
+        del Student_DB_Dictionary[StudentNameToRemove]
+    else:
+        print('Student does not exist!')      
+    print(Student_DB_Dictionary)
+
+def AddNewStudent():    
+    StudentName = input('StudentName: ').capitalize()
+    Grade1 = input('Grade 1: ')
+    Grade2 = input('Grade 2: ')
+    Grade3 = input('Grade 3: ')
+
+    if StudentName not in Student_DB_Dictionary:
+        print('Adding New Student...\n ')
+        Student_DB_Dictionary[StudentName]=[(float(Grade1)),(float(Grade2)),(float(Grade3))]
+    else:
+        print('Student already exist!')
     print(Student_DB_Dictionary)
     
-
 def AverageGradeOfStudent():      
     print('Student Average Grade...\n ')
 
     # Calculate and print the average scores
-    print("Average Scores:")
+    print("Average Scores:\n --------------------\n")
     for student, scores in Student_DB_Dictionary.items():
         average_score = statistics.mean(scores)
         print(f"{student}: {average_score:.2f}")
@@ -78,37 +109,5 @@ def GetAllStudentList():
     # Iterate over the dictionary and print each student's scores
     for student, scores in Student_DB_Dictionary.items():
         print(f"{student}:\t\t{scores[0]}\t{scores[1]}\t{scores[2]}")
-    
 
-def ConfirmationForFurtherProcess():
-    wantToContinue = input('------------ \n Want to continue... (Choose y-yes/n-no) ').capitalize()
-    if wantToContinue == 'Y':
-        mainFunction('N')        
-    if wantToContinue == 'N':
-        print('\n ---------------- \n Thanks for visiting!')
-
-    
-def mainFunction(isFirstTime='Y'):
-    if isFirstTime=='Y':
-        print('==============================\n')
-        print('Welcome to Grade Central \n')
-        print('==============================\n')
-    else:
-        print('______________________\n')
-        
-    userSelectedChoice = Operations()
-    print(userSelectedChoice)
-    if userSelectedChoice=='1':
-        AddStudent()
-    elif userSelectedChoice=='2':
-        RemoveStudent()
-    elif userSelectedChoice=='3':
-        AverageGradeOfStudent()
-    elif userSelectedChoice=='4':
-        GetAllStudentList()
-    else:
-        Operations()
-    ConfirmationForFurtherProcess()
-    
-mainFunction()
-
+Authenticate()
