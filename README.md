@@ -17,6 +17,15 @@ Use Python functions as much as you can
 
 ```Hint: Statistics module might be helpful```
 
+Referrence :
 
+![image](https://github.com/kajulnisharepo/StudentGradingSystemForAdmin/assets/149805304/87615def-7931-4a9e-a89a-54ad936b185d)
 
+![image](https://github.com/kajulnisharepo/StudentGradingSystemForAdmin/assets/149805304/1ad7f905-2566-46d5-8643-be734b88c781)
+
+![image](https://github.com/kajulnisharepo/StudentGradingSystemForAdmin/assets/149805304/42fcb9b8-d73f-4b2a-98ec-ac7f5e18264d)
+
+![image](https://github.com/kajulnisharepo/StudentGradingSystemForAdmin/assets/149805304/00532c42-68a0-4e0e-b38a-a9a105d387c3)
+
+![image](https://github.com/kajulnisharepo/StudentGradingSystemForAdmin/assets/149805304/40be9dec-4019-4a9e-9b47-3686a045e364)
 
