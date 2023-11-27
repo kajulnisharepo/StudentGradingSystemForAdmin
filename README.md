@@ -16,3 +16,7 @@ Make sure you use dictionaries and lists for storing student’s data.
 Use Python functions as much as you can
 
 ```Hint: Statistics module might be helpful```
+
+![image](https://github.com/kajulnisharepo/StudentGradingSystemForAdmin/assets/149805304/147489c9-2ecb-4ef8-8df2-8a1911611672)
+
+
